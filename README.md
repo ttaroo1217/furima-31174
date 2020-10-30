@@ -24,19 +24,19 @@
 
 | Column                  | Type   　     | Options           |
 | ---------------------   | ------ 　     | -----------       |
-| item_name         　　   | string 　     | null: false       |
+| name         　　        | string 　     | null: false       |
 | description             | text 　       | null: false       |
 | user  (FK)        　　   | references 　 | foreign_key: true |
-| category                | integer 　    | null: false       |
-| status                  | integer 　    | null: false       |
-| delivery_charge         | integer 　    | null: false       |
-| area                    | integer　     | null: false       |
-| days                    | integer　     | null: false       |
+| category_id             | integer 　    | null: false       |
+| status_id               | integer 　    | null: false       |
+| delivery_charge_id      | integer 　    | null: false       |
+| area_id                 | integer　     | null: false       |
+| days_id                 | integer　     | null: false       |
 | price                   | integer　     | null: false       |
 
   ### Association
 
-  - has_many :item_orders
+  - has_one :item_order
   - belongs_to :user
 
 
@@ -44,11 +44,8 @@
 
 | Column               | Type   　    | Options           |
 | ---------------------| ------ 　    | -----------       |
-| card_number          | integer 　   | null: false       |
-| exp_number           | integer 　   | null: false       |
-| exp_year             | integer 　   | null: false       |
-| security_code        | integer　    | null: false       |
 | user  (FK)           | references 　| foreign_key: true |
+| item  (FK)           | references 　| foreign_key: true |
 
   ### Association
 
@@ -61,15 +58,15 @@
 
 | Column               | Type   　    | Options           |
 | ---------------------| ------ 　    | -----------       |
-| postal_code          　| string 　   　| null: false       |
-| prefecture           | integer　     | null: false       |
-| city         | string　     | null: false       |
-| house_number         | string　    | null: false       |
-| building_name        | string　     | true      |
-| phone_number         | string　    | null: false       |
-| item_oder  (FK)    | references 　| foreign_key: true |
+| postal_code          | string 　    | null: false       |
+| prefecture_id        | integer　    | null: false       |
+| city                 | string　     | null: false       |
+| house_number         | string　     | null: false       |
+| building_name        | string　     |                   |
+| phone_number         | string　     | null: false       |
+| item_oder  (FK)      | references 　| foreign_key: true |
 
 
 ### Association
 
-- belongs_to :item_oders
+- belongs_to :item_oder
