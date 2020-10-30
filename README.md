@@ -11,40 +11,36 @@
 | last_name            | string 　| null: false |
 | first_name_kana      | string 　| null: false |
 | last_name_kana       | string 　| null: false |
-| year_of_birth        | integer　| null: false |
-| year_of_month        | integer　| null: false |
-| year_of_day          | integer　| null: false |
+| birth_date           | date 　  | null: false |
+
 
   ### Association
 
   - has_many :items
-  - has_many :purchases
-  - has_many :shipping_address
+  - has_many :item_orders
 
 
 ## items テーブル
 
-| Column               | Type   　    | Options           |
-| ---------------------| ------ 　    | -----------       |
-| product_name         | string 　    | null: false       |
-| description          | text 　      | null: false       |
-| user_id  (FK)        | references 　| foreign_key: true |
-| category             | string 　    | null: false       |
-| status               | string 　    | null: false       |
-| delivery_charge      | string 　    | null: false       |
-| area                 | string　     | null: false       |
-| days                 | integer　    | null: false       |
-| price                | integer　    | null: false       |
-| shipping_id  (FK)    | references 　| foreign_key: true |
-
+| Column                  | Type   　     | Options           |
+| ---------------------   | ------ 　     | -----------       |
+| item_name         　　   | string 　     | null: false       |
+| description             | text 　       | null: false       |
+| user  (FK)        　　   | references 　 | foreign_key: true |
+| category                | integer 　    | null: false       |
+| status                  | integer 　    | null: false       |
+| delivery_charge         | integer 　    | null: false       |
+| area                    | integer　     | null: false       |
+| days                    | integer　     | null: false       |
+| price                   | integer　     | null: false       |
 
   ### Association
 
-  - has_many :purchases
-  - has_many :shipping_address
+  - has_many :item_orders
   - belongs_to :user
 
-## purchase テーブル
+
+## item_oder テーブル
 
 | Column               | Type   　    | Options           |
 | ---------------------| ------ 　    | -----------       |
@@ -52,12 +48,12 @@
 | exp_number           | integer 　   | null: false       |
 | exp_year             | integer 　   | null: false       |
 | security_code        | integer　    | null: false       |
-| user_id  (FK)        | references 　| foreign_key: true |
+| user  (FK)           | references 　| foreign_key: true |
 
   ### Association
 
   - belongs_to :user
-  - has_many :items
+  - belongs_to :item
   - has_one :shipping_address
 
 
@@ -65,18 +61,15 @@
 
 | Column               | Type   　    | Options           |
 | ---------------------| ------ 　    | -----------       |
-| post_code          　| integer 　   | null: false       |
-| prefecture           | string　     | null: false       |
-| municipality         | string　     | null: false       |
-| house_number         | integer　    | null: false       |
-| building_name        | string　     | null: false       |
-| phone_number         | integer　    | null: false       |
-| user_id  　(FK)    　 |references 　| foreign_key: true |
-| purchase_id  (FK)    | references 　| foreign_key: true |
+| postal_code          　| string 　   　| null: false       |
+| prefecture           | integer　     | null: false       |
+| city         | string　     | null: false       |
+| house_number         | string　    | null: false       |
+| building_name        | string　     | true      |
+| phone_number         | string　    | null: false       |
+| item_oder  (FK)    | references 　| foreign_key: true |
 
 
 ### Association
 
-- belongs_to :purchase
-- belongs_to :user
-- belongs_to :item
+- belongs_to :item_oders
