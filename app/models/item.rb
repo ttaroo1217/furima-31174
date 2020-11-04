@@ -22,9 +22,11 @@ class Item < ApplicationRecord
   validates :price, numericality: true
   validates :price, inclusion: { in: (300..9999999)}
 
-  validates :category_id, numericality: { other_than: 0 }
-  validates :status_id, numericality: { other_than: 0 }
-  validates :delivery_charge_id, numericality: { other_than: 0 }
-  validates :area_id, numericality: { other_than: 0 }
-  validates :days_id, numericality: { other_than: 0 }
+  with_options numericality: { other_than: 0 } do
+    validates :category_id
+    validates :status_id
+    validates :delivery_charge_id
+    validates :area_id
+    validates :days_id
+  end
 end

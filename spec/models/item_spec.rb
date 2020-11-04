@@ -66,10 +66,20 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price is not included in the list")
     end
 
+    it "価格の範囲が、¥0~¥299の間であること" do  
+      @item.price = 299
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not included in the list")
+    end
+
     it "販売価格は半角数字のみ保存可能であること" do  
       @item.price = "９９９９９"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not a number")
     end
+
+    it "必須項目を入力した上で出品ができる" do
+      @item.valid?
+    end  
   end
 end
