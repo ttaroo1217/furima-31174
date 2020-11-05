@@ -17,8 +17,10 @@ class ItemsController < ApplicationController
       render :new
     end
   end
-
+  
   def show
+    # binding.pry
+    @item = Item.find(params[:id])
   end
 
   def edit
