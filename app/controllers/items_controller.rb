@@ -24,6 +24,9 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    unless  user_signed_in? && @item.user_id == current_user.id
+      return redirect_to action: :index
+    end
   end
 
   def update
@@ -43,7 +46,8 @@ class ItemsController < ApplicationController
 
   def move_to_index
     unless user_signed_in?
-      redirect_to action: :index
+      return redirect_to action: :index
     end
   end
+
 end
