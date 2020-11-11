@@ -40,7 +40,7 @@
   - belongs_to :user
 
 
-## item_oder テーブル
+## item_order テーブル
 
 | Column               | Type   　    | Options           |
 | ---------------------| ------ 　    | -----------       |
@@ -64,9 +64,9 @@
 | house_number         | string　     | null: false       |
 | building_name        | string　     |                   |
 | phone_number         | string　     | null: false       |
-| item_oder  (FK)      | references 　| foreign_key: true |
+| item_order  (FK)      | references 　| foreign_key: true |
 
 
 ### Association
 
-- belongs_to :item_oder
+- belongs_to :item_order
