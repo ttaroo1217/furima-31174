@@ -63,10 +63,4 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  # def order_move_to_index
-  #   unless @item.item_order == nil
-  #     return redirect_to root_path
-  #   end
-  # end
-
 end

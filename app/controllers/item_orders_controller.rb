@@ -1,7 +1,6 @@
 class ItemOrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :find_item, only: [:index, :create, :order_move_to_index]
-  before_action :order_move_to_index, only: [:index]
+  before_action :find_item, only: [:index, :create]
   before_action :edit_move_to_index, only: [:index]
   
   
@@ -24,12 +23,6 @@ class ItemOrdersController < ApplicationController
   private
   def order_params
    params.require(:order_form).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
-  end
-
-  def order_move_to_index
-    unless @item.item_order == nil
-      return redirect_to root_path
-    end
   end
 
   def edit_move_to_index
