@@ -1,8 +1,11 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, only: [:new, :destroy]
   before_action :set_item, only: [:edit, :update, :destroy]
+  # before_action :order_move_to_index, only: [:edit]
+  
 
   def index
+    # @item_order = ItemOrder.new
     @items = Item.includes(:user).order("created_at DESC")
   end
 
@@ -59,5 +62,11 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  # def order_move_to_index
+  #   unless @item.item_order == nil
+  #     return redirect_to root_path
+  #   end
+  # end
 
 end

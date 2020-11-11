@@ -4,11 +4,12 @@ FactoryBot.define do
     description {Faker::Lorem.sentence}
     category_id {"1"}
     status_id {"2"}
-    delivery_charge_id {"3"}
+    delivery_charge_id {"2"}
     area_id {"4"}
     days_id {"5"}
     price {"30000"}
     association :user
+    # association :order_form
 
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
