@@ -10,6 +10,5 @@ FactoryBot.define do
     first_name_kana {"タロウ"}
     last_name_kana {"ヤマダ"}
     birth_date {"19871217"}
-    # association :order_form
   end
 end

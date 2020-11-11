@@ -27,17 +27,10 @@ class ItemOrdersController < ApplicationController
   end
 
   def order_move_to_index
-    # @item = Item.new
     unless @item.item_order == nil
       return redirect_to root_path
     end
   end
-
-  # def move_to_login
-  #   if user_signed_in?
-  #     return redirect_to new_user_session_path
-  #   end
-  # end
 
   def edit_move_to_index
     if @item.user_id == current_user.id

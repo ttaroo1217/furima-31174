@@ -60,7 +60,7 @@ RSpec.describe OrderForm, type: :model do
     expect(@order_form.errors.full_messages).to include("Phone number is not a number")
   end
 
-  it "電話番号が11桁以内であること" do
+  it "電話番号は12桁以上であると登録できないこと" do
     @order_form.phone_number = '012345678911'
     @order_form.valid?
     expect(@order_form.errors.full_messages).to include("Phone number is invalid")
