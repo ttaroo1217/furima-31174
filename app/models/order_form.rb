@@ -10,6 +10,7 @@ class OrderForm
     validates :city
     validates :house_number
     validates :phone_number
+    validates :token
   end
 
   validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
