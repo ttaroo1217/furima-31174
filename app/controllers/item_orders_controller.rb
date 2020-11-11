@@ -1,29 +1,19 @@
 class ItemOrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
+  before_action :find_item, only: [:index, :create, :order_move_to_index]
   before_action :order_move_to_index, only: [:index]
   before_action :edit_move_to_index, only: [:index]
   
+  
 
   def index
-    @item = Item.find(params[:item_id])
-    @order_form = OrderForm.new
-  end
-
-  def new
     @order_form = OrderForm.new
   end
 
   def create
-    # binding.pry
-    @item = Item.find(params[:item_id])
     @order_form = OrderForm.new(order_params)
      if @order_form.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: order_params[:token],
-        currency: 'jpy',
-      )
+      pay_item
       @order_form.save
       redirect_to root_path
      else
@@ -37,8 +27,7 @@ class ItemOrdersController < ApplicationController
   end
 
   def order_move_to_index
-    @item = Item.new
-    @item = Item.find(params[:item_id])
+    # @item = Item.new
     unless @item.item_order == nil
       return redirect_to root_path
     end
@@ -56,4 +45,16 @@ class ItemOrdersController < ApplicationController
     end
   end
 
+  def find_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: order_params[:token],
+        currency: 'jpy',
+      )
+  end
 end

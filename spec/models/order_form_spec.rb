@@ -48,10 +48,22 @@ RSpec.describe OrderForm, type: :model do
     expect(@order_form.errors.full_messages).to include("Postal code is invalid")
   end
 
+  it "建物名が抜けていても登録できること" do
+    @order_form.building_name = nil
+    @order_form.valid?
+    expect(@order_form.valid?).to eq true
+  end
+
   it "電話番号にはハイフンは不要で、11桁以内であること（09012345678となる）" do
     @order_form.phone_number = '080-123456'
     @order_form.valid?
     expect(@order_form.errors.full_messages).to include("Phone number is not a number")
+  end
+
+  it "電話番号が11桁以内であること" do
+    @order_form.phone_number = '012345678911'
+    @order_form.valid?
+    expect(@order_form.errors.full_messages).to include("Phone number is invalid")
   end
 
   it "クレジットカードの情報は必須であること" do
